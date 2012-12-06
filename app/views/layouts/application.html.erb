@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>RailsTutorial</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-
-<%= yield %>
-
-</body>
-</html>
+ <!DOCTYPE html>
+ <html>
+ 	<head>
+ 	 	<title>Rubu on Rails Tutorial App | <%= @title %></title>
+ 	 	<%= csrf_meta_tag %>
+ 	<body>
+ 		<%= yield %>
+ 	</body>
+ </html>

@@ -1,4 +1,5 @@
 This id an example from the book of Ruby on Rails tutorial.
+Thanks Michael Hartl.
 My development environment is：
   ruby:1.9.3
   rails: 3.2.8
