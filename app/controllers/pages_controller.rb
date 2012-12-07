@@ -11,4 +11,8 @@ class PagesController < ApplicationController
   def about
   	@title = "About"
   end
+  #2012-12-7/16:22
+  def help
+    @title = "Help"
+  end
 end

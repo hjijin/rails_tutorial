@@ -1,9 +1,11 @@
 <header>
-	<%= image_tag("logo.png", :alt => "Sample App", :class => "round") %>
+	<!-- logo方法：代码被提取到helper/application_helper.rb的logo方法下 -->
+	<%= link_to logo, root_path %>
 	<nav class="round">
 		<ul>
-			<li><%= link_to "Home", '#' %></li>
-			<li><%= link_to "Help", '#' %></li>
+												<!-- root_path -->
+			<li><%= link_to "Home", '/' %></li>
+			<li><%= link_to "Help", help_path %></li>
 			<li><%= link_to "Sign in", '#' %></li>
 		</ul>
 	</nav>
