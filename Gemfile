@@ -24,6 +24,7 @@ gem 'jquery-rails'
 
 group :development do
 	gem 'rspec-rails'
+	gem 'annotate'	#自动将表的结构写在model里面
 end
 
 group :test do
