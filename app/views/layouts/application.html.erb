@@ -14,6 +14,9 @@
  				<%= yield %>
  			</section>
  			<%= render 'layouts/footer' %>
+ 			<!-- 2012-12-09/17:00 -->
+ 			<!-- 在开发环境显示页面当前的controller和action	 -->
+ 			<%= debug(params) if Rails.env.development? %>
  		</div>
  	</body>
  </html>
