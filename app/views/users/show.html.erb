@@ -1,1 +1,7 @@
-<%= @user.name %>,<%= @user.email %>
+<h1>
+	<%#= @user.name+"<script>" %> <!--会被转化成： Michael Hartl&lt;script&gt; -->
+	<%#= raw(@user.name + "<script>") %><!--会被转化成： Michael Hartl<script> -->
+	<%#= gravatar_image_tag @user.email, :class => 'gravatar' %> <!-- 在helper添加方法前 -->
+	<%= gravatar_for @user %> <!-- 在helper添加方法后 -->
+	<%= @user.name %>
+</h1>
