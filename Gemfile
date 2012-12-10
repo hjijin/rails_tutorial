@@ -32,6 +32,7 @@ group :test do
 	gem 'spork-rails'
 	gem 'webrat'
 	gem 'growl'
+	gem 'factory_girl_rails', '1.4.0'
 end
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
