@@ -1,7 +1,20 @@
-<h1>
-	<%#= @user.name+"<script>" %> <!--会被转化成： Michael Hartl&lt;script&gt; -->
-	<%#= raw(@user.name + "<script>") %><!--会被转化成： Michael Hartl<script> -->
-	<%#= gravatar_image_tag @user.email, :class => 'gravatar' %> <!-- 在helper添加方法前 -->
-	<%= gravatar_for @user %> <!-- 在helper添加方法后 -->
-	<%= @user.name %>
-</h1>
+<table class="profile" summary="Profile information">
+	<tr>
+		<td class="main">
+			<h1>
+				<%#= @user.name+"<script>" %> <!--会被转化成： Michael Hartl&lt;script&gt; -->
+				<%#= raw(@user.name + "<script>") %><!--会被转化成： Michael Hartl<script> -->
+				
+				<%#= gravatar_image_tag @user.email, :class => 'gravatar' %> <!-- 在helper添加方法前 -->
+				<%= gravatar_for @user %> <!-- 在helper添加方法后 -->
+				<%= @user.name %>
+			</h1>
+		</td>
+		<td class="sidebar found">
+			<strong>Name</strong><%=  @user.name %> <br />
+			<strong>URL</strong><%= link_to user_path(@user), user_path(@user) %>
+			<%#= link_to user_path(@user), @user %>
+			<%#= link_to "/users/#{@user.id}",	"/users/#{@user.id}" %>
+		</td>
+	</tr>
+</table>
