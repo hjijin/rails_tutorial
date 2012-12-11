@@ -5,7 +5,6 @@ gem 'rails', '3.2.8'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql2'
 gem 'gravatar_image_tag'
 
 # Gems used only for assets and not required
@@ -23,6 +22,7 @@ end
 gem 'jquery-rails'
 
 group :development do
+	gem 'mysql2'
 	gem 'rspec-rails'
 	gem 'annotate'	#自动将表的结构写在model里面
 end
