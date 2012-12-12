@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
   def new
   	@title = "Sign in"
   end
-
+  # 2012-12-12/10:00
   def create
   	user = User.authenticate(params[:session][:email], params[:session][:password])
   	if user.nil?
@@ -10,7 +10,8 @@ class SessionsController < ApplicationController
   		flash.now[:error] = "Invalid email/password combination."
   		render 'new'
   	else
-  		# success
+  		sign_in user
+  		redirect_to user
   	end
   end
 

@@ -16,7 +16,7 @@ describe SessionsController do
   end
 
   describe "POST 'create'" do
-
+    # 2012-12-12/09:40
     describe "failure" do
       
       before(:each) do
@@ -36,6 +36,25 @@ describe SessionsController do
       it "should have an error message" do
         post :create, :session => @attr
         flash.now[:error].should =~ /invalid/i
+      end
+    end
+    # 2012-12-12/11:00
+    describe "success" do
+
+      before(:each) do
+        @user = Factory(:user)
+        @attr = { :email => @user.email, :password => @user.password }
+      end
+
+      it "should sign the user in" do
+        post :create, :session => @attr
+        controller.current_user.should == @user
+        controller.should be_signed_in
+      end
+
+      it "should redirect to the user show page" do
+        post :create, :session => @attr
+        response.should redirect_to(user_path(@user))
       end
     end
   end
