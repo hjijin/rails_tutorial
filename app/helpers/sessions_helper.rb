@@ -22,10 +22,29 @@ module SessionsHelper
 		self.current_user = nil
 	end
 
-	def deny_access
-	  redirect_to signin_path, :notice => "Please sign in to access this page."
+	def current_user?(user)
+		user == current_user
 	end
 	
+	def deny_access
+		store_location 
+	  redirect_to signin_path, :notice => "Please sign in to access this page."
+	end
+
+	# 登陆后返回刚访问的页面
+	def store_location
+		session[:return_to] = request.fullpath
+	end
+
+	def redirect_back_or(default)
+		redirect_to(session[:return_to] || default)
+		cleat_return_to
+	end
+
+	def cleat_return_to
+		session[:return_to] = nil #防止退出后再登陆还是退出前访问的页面
+	end
+
 	private
 
 		def user_from_remember_token
