@@ -1,7 +1,13 @@
 class UsersController < ApplicationController
-  before_filter :authenticate, :only => [:edit, :update]# 防止未登陆后修改信息
+  before_filter :authenticate, :only => [:index, :edit, :update]# 防止未登陆后修改信息
   before_filter :correct_user, :only => [:edit, :update]# 防止登陆后修改别人的信息
-	def show
+	
+  def index
+    @users = User.all 
+    @title = "All users"
+  end
+
+  def show
 		@user = User.find(params[:id])
 		@title = @user.name
 	end
