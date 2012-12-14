@@ -3,7 +3,8 @@ class UsersController < ApplicationController
   before_filter :correct_user, :only => [:edit, :update]# 防止登陆后修改别人的信息
 	
   def index
-    @users = User.all 
+    # @users = User.all 
+    @users = User.paginate(:page => params[:page])
     @title = "All users"
   end
 

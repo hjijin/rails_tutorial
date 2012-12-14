@@ -6,7 +6,7 @@ gem 'rails', '3.2.8'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'gravatar_image_tag'
-
+gem 'will_paginate'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -25,6 +25,7 @@ group :development do
 	gem 'mysql2'
 	gem 'rspec-rails'
 	gem 'annotate'	#自动将表的结构写在model里面
+	gem 'faker'
 end
 
 group :test do
