@@ -11,6 +11,8 @@ class UsersController < ApplicationController
 
   def show
 		@user = User.find(params[:id])
+    # 2012-12-15/17:20
+    @microposts = @user.microposts.paginate(:page => params[:page])
 		@title = @user.name
 	end
 
@@ -64,7 +66,7 @@ class UsersController < ApplicationController
       # redirect_to signin_path, :notice => "Please sign in to access this page." 
       deny_access unless signed_in? #将上面的方法提取到deny_access，并放置在sessions_helper.rb 里(因为controller里，application_controller.rb 引用了它  )
     end
-    # 2012-12-12/20:10
+    # 2012-12-12/20:10 
     # 防止登陆后修改别人的信息
     def correct_user
       @user = User.find(params[:id])
