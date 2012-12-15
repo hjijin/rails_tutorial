@@ -8,6 +8,7 @@ gem 'rails', '3.2.8'
 gem 'gravatar_image_tag'
 gem 'will_paginate'
 gem 'jquery-rails'
+gem 'rake','10.0.2'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

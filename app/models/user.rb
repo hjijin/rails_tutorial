@@ -16,9 +16,10 @@ class User < ActiveRecord::Base
 	# 2012-12-09/17:48
 	# 添加password
 	attr_accessor :password
-
   attr_accessible :email, :name, :password, :password_confirmation, :admin
   
+  has_many :microposts, dependent: :destroy #dependent: :destroy user删除，则其相关的microposts也被删除
+
   email_regex = /\A[\w+\-.]+@[a-z\d.\-.]+\.[a-z]+\z/i
   validates :name, 	:presence => true, 
   									:length => { :maximum => 50 }

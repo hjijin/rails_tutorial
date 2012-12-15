@@ -147,6 +147,7 @@ DEPENDENCIES
   mysql2
   pg
   rails (= 3.2.8)
+  rake (= 10.0.2)
   rspec-rails
   sass-rails (~> 3.2.3)
   spork-rails

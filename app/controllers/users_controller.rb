@@ -52,27 +52,28 @@ class UsersController < ApplicationController
 
   # 2012-12-14/11:50
   def destroy
-    User.find(params[:id]).destroy
+    # User.find(params[:id]).destroy
+    @user.destroy #调用了下面admin_user方法的@user
     redirect_to users_path, :flash => { :success => "User destroyed." }
   end
 
   private
 
-  def authenticate
-    # flash[:notice] = "Please sign in to access this page." 
-    # redirect_to signin_path, :notice => "Please sign in to access this page." 
-    deny_access unless signed_in? #将上面的方法提取到deny_access，并放置在sessions_helper.rb 里(因为controller里，application_controller.rb 引用了它  )
-  end
-  # 2012-12-12/20:10
-  # 防止登陆后修改别人的信息
-  def correct_user
-    @user = User.find(params[:id])
-    redirect_to(root_path) unless current_user?(@user)#sessions_helper.rb有current_user?方法
-  end
+    def authenticate
+      # flash[:notice] = "Please sign in to access this page." 
+      # redirect_to signin_path, :notice => "Please sign in to access this page." 
+      deny_access unless signed_in? #将上面的方法提取到deny_access，并放置在sessions_helper.rb 里(因为controller里，application_controller.rb 引用了它  )
+    end
+    # 2012-12-12/20:10
+    # 防止登陆后修改别人的信息
+    def correct_user
+      @user = User.find(params[:id])
+      redirect_to(root_path) unless current_user?(@user)#sessions_helper.rb有current_user?方法
+    end
 
-  # 是管理员才能删除用户，并且不能删除自己
-  def admin_user
-    user = User.find(params[:id])
-    redirect_to(root_path) if ( !current_user.admin? || current_user?(user))
-  end
+    # 是管理员才能删除用户，并且不能删除自己
+    def admin_user
+      @user = User.find(params[:id])
+      redirect_to(root_path) if ( !current_user.admin? || current_user?(@user))
+    end
 end
