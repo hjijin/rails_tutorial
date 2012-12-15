@@ -2,6 +2,7 @@ class PagesController < ApplicationController
 	#2012-12-6/09:00
   def home
   	@title = "Home"
+    @micropost = Micropost.new if signed_in?
   end
   #2012-12-6/09:00
   def contact
