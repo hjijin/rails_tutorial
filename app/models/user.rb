@@ -36,8 +36,12 @@ class User < ActiveRecord::Base
 		encrypted_password == encrypt(submitted_password)
   end
 
+  # 2012-12-16/11:18
+  def feed
+  	Micropost.where("user_id = ?", id)
+  end
+
   # def slef.authenticate(email,submitted_password)
-  	
   # end
  	  class << self
  	  	def authenticate(email,submitted_password)
