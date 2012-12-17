@@ -19,6 +19,12 @@ class User < ActiveRecord::Base
   attr_accessible :email, :name, :password, :password_confirmation, :admin
   
   has_many :microposts, dependent: :destroy #dependent: :destroy user删除，则其相关的microposts也被删除
+  has_many :relationships, dependent: :destroy, :foreign_key => "follower_id"
+  
+  # 2012-12-16/17:48
+  has_many :reverse_relationships, dependent: :destroy, foreign_key: "followed_id", class_name: "Relationship"
+  has_many :following, through: :relationships, source: :followed
+  has_many :followers, through: :reverse_relationships, source: :follower
 
   email_regex = /\A[\w+\-.]+@[a-z\d.\-.]+\.[a-z]+\z/i
   validates :name, 	:presence => true, 
@@ -37,8 +43,23 @@ class User < ActiveRecord::Base
   end
 
   # 2012-12-16/11:18
+  # 2012-12-17/15:17
   def feed
-  	Micropost.where("user_id = ?", id)
+    Micropost.from_users_followed_by(self)
+  end
+
+  # 2012-12-16/17:30
+  # 下面三个方法都是在测试文件中被调用
+  def following?(followed)
+    relationships.find_by_followed_id(followed)
+  end
+  
+  def follow!(followed)
+    relationships.create!(:followed_id => followed.id)
+  end
+  
+  def unfollow!(followed)
+    relationships.find_by_followed_id(followed).destroy
   end
 
   # def slef.authenticate(email,submitted_password)

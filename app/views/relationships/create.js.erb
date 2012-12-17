@@ -1,0 +1,4 @@
+// escape_javascript(render(:partial => @entry))可以缩写成：j render @entry。
+$("#follow_form").html("<%= escape_javascript(render('users/unfollow')) %>")
+$("#followers").html('<%= pluralize(@user.followers.count, "follower") %>')
+
