@@ -1,14 +1,17 @@
-source 'http://ruby.taobao.org'
+source 'https://rubygems.org'
+# source 'http://ruby.taobao.org'
 
-gem 'rails', '3.2.8'
+gem 'rails', '3.2.13'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
+group :development, :test do
+  gem 'mysql2'
+  gem 'rspec-rails', '2.11.0'
+end
 
-gem 'gravatar_image_tag'
-gem 'will_paginate'
-gem 'jquery-rails'
-gem 'rake','10.0.2'
+gem 'multi_json', '1.7.3'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -21,23 +24,14 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-group :development do
-	gem 'mysql2'
-	gem 'rspec-rails'
-	gem 'annotate'	#自动将表的结构写在model里面
-	gem 'faker'
-end
+gem 'jquery-rails', '2.0.2'
 
 group :test do
-	gem 'rspec-rails'
-	gem 'spork-rails'
-	gem 'webrat'
-	gem 'growl'
-	gem 'factory_girl_rails', '1.4.0'
+  gem 'capybara', '1.1.2' #编写模拟与应用程序交互的代码
 end
 
 group :production do
-  gem 'pg'
+  gem 'pg', '0.12.2'
 end
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
