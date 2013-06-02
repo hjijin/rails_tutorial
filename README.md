@@ -1,4 +1,5 @@
-====Rails_tutorial
+RailsTutorial
+--------------
 
 This is an example from the book of Ruby on Rails Tutorial[http://railstutorial.org/book].
 Thanks Michael Hartl [http://railstutorial.org].
