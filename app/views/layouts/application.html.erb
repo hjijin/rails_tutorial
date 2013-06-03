@@ -6,27 +6,13 @@
 	  <%= javascript_include_tag "application" %>
 	  <%= csrf_meta_tags %>
 	  <!-- 这些代码会引入应用程序的样式表和 JavaScript 文件（asset pipeline 的一部分）；Rails 中的 csrf_meta_tags 方法是用来避免“跨站请求伪造”（cross-site request forgery，CSRF，一种网络攻击）的。 -->
-	  <!--[if lt IE 9]>
-	    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-	  <![endif]-->
+	  <%= render 'layouts/shim' %>
 	</head>
 	<body>
-		<header class="navbar navbar-fixed-top"><!-- header 标签的意思是放在网页顶部的内容。 -->
-		  <div class="navbar-inner">
-		    <div class="container">
-		      <%= link_to "sample app", '#', id: "logo" %>
-		      <nav>
-		        <ul class="nav pull-right">
-		          <li><%= link_to "Home",    '#' %></li>
-		          <li><%= link_to "Help",    '#' %></li>
-		          <li><%= link_to "Sign in", '#' %></li>
-		        </ul>
-		      </nav>
-		    </div>
-		  </div>
-		</header>
+		<%= render 'layouts/header' %>
 		<div class="container">
 		  <%= yield %>
+		  <%= render 'layouts/footer' %>
 		</div>
 	</body>
 </html>
