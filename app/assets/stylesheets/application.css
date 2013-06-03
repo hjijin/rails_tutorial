@@ -9,5 +9,7 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require_self
+ # 会把 application.css 这个文件中的 CSS 也加载进来。
  *= require_tree .
+ # 会把 app/assets/stylesheets 目录中的所有 CSS 文件都引入应用程序的样式表中。
  */
