@@ -1,5 +1,5 @@
-source 'https://rubygems.org'
-# source 'http://ruby.taobao.org'
+# source 'https://rubygems.org'
+source 'http://ruby.taobao.org'
 
 gem 'rails', '3.2.13'
 
@@ -8,6 +8,10 @@ gem 'rails', '3.2.13'
 group :development, :test do
   gem 'mysql2'
   gem 'rspec-rails', '2.11.0'
+  gem 'guard-rspec'
+
+  gem 'guard-spork', '1.5.0'
+  gem 'spork', '0.9.2'
 end
 
 gem 'multi_json', '1.7.3'
@@ -28,6 +32,9 @@ gem 'jquery-rails', '2.0.2'
 
 group :test do
   gem 'capybara', '1.1.2' #编写模拟与应用程序交互的代码
+  # Mac OS X 中需要的测试组 gem
+  gem 'rb-fsevent', '0.9.3', :require => false
+  gem 'growl', '1.0.3'
 end
 
 group :production do
