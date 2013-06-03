@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>RailsTutorial</title>
+  <title>Rails Tutouial | <%= yield(:title) %></title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+  <!-- 这些代码会引入应用程序的样式表和 JavaScript 文件（asset pipeline 的一部分）；Rails 中的 csrf_meta_tags 方法是用来避免“跨站请求伪造”（cross-site request forgery，CSRF，一种网络攻击）的。 -->
 </head>
 <body>
 
