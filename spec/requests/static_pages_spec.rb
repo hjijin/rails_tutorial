@@ -57,7 +57,7 @@ describe "Static Pages" do
 
   describe "About page" do
 
-     before { visit about_path }
+    before { visit about_path }
 
     it { should have_selector('h1',    text: 'About') }
   	# it "should have the h1 'About'" do
@@ -91,5 +91,20 @@ describe "Static Pages" do
       # visit contact_path
       # page.should have_selector('titel', text: "Rails Tutorial | Contact")
     # end
+  end
+
+  it "should have the right links on the layout" do
+    visit root_path
+    click_link "About"
+    page.should have_selector 'title', text: full_title('About')
+    click_link "Help"
+    page.should # fill in
+    click_link "Contact"
+    page.should # fill in
+    click_link "Home"
+    click_link "Sign up now!"
+    page.should # fill in
+    click_link "Rails App"
+    page.should # fill in
   end
 end
