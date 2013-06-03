@@ -52,8 +52,7 @@ describe "Static Pages" do
   		# visit '/static_pages/help'
       # visit help_path
   		# page.should have_selector('title', :text => "Rails Tutorial | Help")
->>>>>>> filling-in-layout
-  	end
+  	# end
   end
 
   describe "About page" do
@@ -67,12 +66,12 @@ describe "Static Pages" do
   		# page.should have_selector('h1', :text => 'About')
   	# end
 
-    it { should have_selector('title', text: full_title('About Us')) }
+    it { should have_selector('title', text: full_title('About')) }
   	# it "should have the title 'About'" do	
   		# visit '/static_pages/about'
       # visit about_path
   		# page.should have_selector('title', :text => "Rails Tutorial | About")
-  	end
+  	# end
   end
 
   describe "Contact page" do
@@ -84,13 +83,13 @@ describe "Static Pages" do
       # visit '/static_pages/contact'
       # visit contact_path
       # page.should have_selector('h1', text: 'Contact')
-    end
+    # end
 
     it { should have_selector('title', text: full_title('Contact')) }
     # it "should have the title 'Contact'" do 
       # visit '/static_pages/contact'
       # visit contact_path
       # page.should have_selector('titel', text: "Rails Tutorial | Contact")
-    end
+    # end
   end
 end
