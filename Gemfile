@@ -3,6 +3,7 @@ source 'http://ruby.taobao.org'
 
 gem 'rails', '3.2.13'
 gem 'bootstrap-sass', '2.3.1.3'
+gem 'bcrypt-ruby', '3.0.1' # 加密密码 User 数据结构做些改动，向 users 表中加入 password_digest 列
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 group :development, :test do
@@ -12,6 +13,7 @@ group :development, :test do
 
   gem 'guard-spork', '1.5.0'
   gem 'spork', '0.9.2'
+  gem 'annotate', '2.5.0'
 end
 
 gem 'multi_json', '1.7.3'
