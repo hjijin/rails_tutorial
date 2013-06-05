@@ -121,4 +121,14 @@ describe User do
       # specify 是 it 方法的别名，如果你觉得某个地方用 it 读起来怪怪的，就可以换用 specify。
     end
   end
+
+  describe "email address with mixed case" do
+    let(:mixed_case_email) { "Foo@ExAMPle.CoM" }
+
+    it "should be saved as all lower-case" do
+      @user.email = mixed_case_email
+      @user.save
+      @user.reload.email.should == mixed_case_email.downcase
+    end
+  end
 end

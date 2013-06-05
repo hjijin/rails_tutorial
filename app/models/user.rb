@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
 	# 定义 authenticate 方法，对比加密后的密码和 password_digest 是否一致，验证用户的身份。
 
   before_save { |user| user.email = email.downcase } 
+  # before_save { self.email.downcase! } # before_save 回调函数的另一种写法
   # 存入数据库之前把 Email 地址转换成全小写字母的形式，因为不是所有数据库适配器的索引都是区分大小写的。
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i # Ruby 中的常量都是以大写字母开头的。
