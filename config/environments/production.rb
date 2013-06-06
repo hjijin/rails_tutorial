@@ -28,7 +28,8 @@ RailsTutorial::Application.configure do
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  # config.force_ssl = true
+  # 开启对安全套接层（Secure Sockets Layer, SSl）12协议的支持，确保注册过程的安全。
+  config.force_ssl = true
 
   # See everything in the log (default is :info)
   # config.log_level = :debug
