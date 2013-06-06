@@ -1,5 +1,5 @@
 RailsTutorial::Application.routes.draw do
-  get "users/new"
+  resources :users
 
   # get "static_pages/home" # 定义具名路由:
   # match '/home', to: 'static_pages#home' # match '/home' 会自动创建具名路由函数

@@ -10,7 +10,7 @@ group :development, :test do
   gem 'mysql2'
   gem 'rspec-rails', '2.11.0'
   gem 'guard-rspec'
-
+  gem 'growl', '1.0.3'
   gem 'guard-spork', '1.5.0'
   gem 'spork', '0.9.2'
   gem 'annotate', '2.5.0'
@@ -36,7 +36,7 @@ group :test do
   gem 'capybara', '1.1.2' #编写模拟与应用程序交互的代码
   # Mac OS X 中需要的测试组 gem
   gem 'rb-fsevent', '0.9.3', :require => false
-  gem 'growl', '1.0.3'
+  gem 'factory_girl_rails', '4.2.1' # 添加 spec/factories.rb
 end
 
 group :production do

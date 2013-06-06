@@ -122,6 +122,7 @@ describe User do
     end
   end
 
+  # 把 Email 地址转换成小写字母形式
   describe "email address with mixed case" do
     let(:mixed_case_email) { "Foo@ExAMPle.CoM" }
 

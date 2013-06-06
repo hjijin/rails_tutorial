@@ -104,7 +104,7 @@ describe "Static Pages" do
     click_link "Home"
     click_link "Sign up now!"
     page.should # fill in
-    click_link "Rails App"
+    click_link "Tutorial"
     page.should # fill in
   end
 end
