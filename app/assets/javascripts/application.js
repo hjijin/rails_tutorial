@@ -12,4 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
+//把 Bootstrap 的 JavaScript 代码加入 application.js
+//= require bootstrap 
 //= require_tree .

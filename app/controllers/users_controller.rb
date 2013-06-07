@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
+      sign_in @user # 用户注册后直接登录
     	flash[:success] = "Welcome to Rails's World!"
       redirect_to @user
     else

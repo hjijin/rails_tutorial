@@ -1,6 +1,12 @@
 RailsTutorial::Application.routes.draw do
   resources :users
 
+  resources :sessions, only: [:new, :create, :destroy] # 为 resources 方法指定了 :only 选项，只创建 new、create 和 destroy 动作。
+
+  match '/signup', to: 'users#new'
+  match '/signin', to: 'sessions#new'
+  match '/signout', to: 'sessions#destroy', via: :delete # 这个参数指明 destroy 动作要使用 DELETE 请求
+
   # get "static_pages/home" # 定义具名路由:
   # match '/home', to: 'static_pages#home' # match '/home' 会自动创建具名路由函数
   # home_path => '/home'
@@ -16,7 +22,6 @@ RailsTutorial::Application.routes.draw do
   # get "static_pages/contact"
   match '/contact', to: 'static_pages#contact'
 
-  match '/signup',  to: 'users#new'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

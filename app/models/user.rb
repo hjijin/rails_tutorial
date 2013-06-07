@@ -21,6 +21,8 @@ class User < ActiveRecord::Base
   # before_save { self.email.downcase! } # before_save 回调函数的另一种写法
   # 存入数据库之前把 Email 地址转换成全小写字母的形式，因为不是所有数据库适配器的索引都是区分大小写的。
 
+  before_save :create_remember_token
+
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i # Ruby 中的常量都是以大写字母开头的。
 
   validates :name, presence: true, length: { maximum: 50 }
@@ -38,5 +40,13 @@ class User < ActiveRecord::Base
 
 		# 上面这种难以置信的过程是可能会发生的，只要有一定的访问量，在任何 Rails 网站中都可能发生。
 		# 幸好解决的办法很容易实现，只需在数据库层也加上唯一性限制。我们要做的是在数据库中为 email 列建立索引，然后为索引加上唯一性限制。
-
+  private
+    # 只会在 User 模型内部使用的方法，没必要把它开放给用户之外的对象。在 Ruby 中，可以使用 private 关键字限制方法的可见性
+    def create_remember_token
+      self.remember_token = SecureRandom.urlsafe_base64
+      # 如果不指定 self 的话，只是创建了一个名为 remember_token 的局部变量， 
+      # 加上 self 之后，赋值操作就会把值赋值给用户的 remember_token 属性，保存用户时，随着其他的属性一起存入数据库。
+      # Ruby 标准库中 SecureRandom 模块提供的 urlsafe_base64 方法来生成随机字符串
+      # urlsafe_base64 方法生成的是 Base64 字符串
+    end
 end

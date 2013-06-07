@@ -29,6 +29,8 @@ describe User do
   it { should respond_to(:password_digest) }
   it { should respond_to(:password) }
   it { should respond_to(:password_confirmation) }
+  it { should respond_to(:remember_token) }
+  it { should respond_to(:authenticate) }
 
   it { should be_valid } # 为了保证测试的全面，确保 @user 对象开始时是合法的
 
@@ -114,7 +116,7 @@ describe User do
       it { should == found_user.authenticate(@user.password) }
     end
 
-    describe "whtn invalid password" do
+    describe "with invalid password" do
       let(:user_for_invalid_password) {found_user.authenticate("invalid")}
       it { should_not == user_for_invalid_password }
       specify { user_for_invalid_password.should be_false } 
@@ -131,5 +133,10 @@ describe User do
       @user.save
       @user.reload.email.should == mixed_case_email.downcase
     end
+  end
+  # 测试合法的（非空）remember_token
+  describe "remember token" do
+    before { @user.save }
+    its(:remember_token) { should_not be_blank } # == it { @user.remember_token.should_not be_blank }
   end
 end

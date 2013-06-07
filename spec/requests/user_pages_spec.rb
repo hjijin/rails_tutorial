@@ -58,6 +58,7 @@ describe "User Pages" do
 
         it { should have_selector('title', text: user.name) }
         it { should have_selector('div.alert.alert-success', text: 'Welcome') }
+        it { should have_link('Sign out') } # 测试刚注册的用户是否会自动登录
       end
   	end
   end

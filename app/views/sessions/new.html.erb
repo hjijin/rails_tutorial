@@ -1,0 +1,23 @@
+<% provide(:title, "Sign in") %>
+<h1>Sign in</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(:session, url: sessions_path) do |f| %>
+
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+
+      <%= f.submit "Sign in", class: "btn btn-primary" %>
+    <% end %>
+
+    <p>New user? <%= link_to "Sign up now!", signup_path %></p>
+  </div>
+</div>
+
+<!-- form_for(:session, url: sessions_path) -->
+<!-- 注册表单和登录表单的区别在于，程序中没有 Session 模型，因此也就没有类似 @user 的变量。
+		 也就是说，在构建登录表单时，我们要给 form_for 提供更多的信息。 -->

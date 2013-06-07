@@ -37,6 +37,10 @@ group :test do
   # Mac OS X 中需要的测试组 gem
   gem 'rb-fsevent', '0.9.3', :require => false
   gem 'factory_girl_rails', '4.2.1' # 添加 spec/factories.rb
+
+  # 安装 Cucumber
+  gem 'cucumber-rails', '1.3.1', require: false
+  gem 'database_cleaner', '1.0.1'
 end
 
 group :production do
