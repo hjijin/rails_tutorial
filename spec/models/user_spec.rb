@@ -139,4 +139,17 @@ describe User do
     before { @user.save }
     its(:remember_token) { should_not be_blank } # == it { @user.remember_token.should_not be_blank }
   end
+
+  # 测试 admin 属性
+  it { should respond_to(:admin) }
+  it { should respond_to(:authenticate) }
+
+  it { should be_valid }
+  it { should_not be_admin }
+
+  describe "with admin attribute set to 'true'" do
+    before { @user.toggle!(:admin) } # 使用 toggle! 方法把 admin 属性的值从 false 转变成 true。
+
+    it { should be_admin } # 说明用户对象应该可以响应 admin? 方法
+  end
 end

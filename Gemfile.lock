@@ -1,15 +1,3 @@
-GIT
-  remote: git://github.com/heroku/rails3_serve_static_assets.git
-  revision: 84910ceb4ca2851d650e66d3b22f5008acf253f8
-  specs:
-    rails3_serve_static_assets (0.0.1)
-
-GIT
-  remote: git://github.com/heroku/rails_log_stdout.git
-  revision: 01b5bcc572e3baed1618f4068920dd83bd491fb2
-  specs:
-    rails_log_stdout (0.0.1)
-
 GEM
   remote: http://ruby.taobao.org/
   specs:
@@ -46,6 +34,8 @@ GEM
     bcrypt-ruby (3.0.1)
     bootstrap-sass (2.3.1.3)
       sass (~> 3.2)
+    bootstrap-will_paginate (0.0.9)
+      will_paginate
     builder (3.0.4)
     capybara (1.1.2)
       mime-types (>= 1.16)
@@ -73,9 +63,10 @@ GEM
     factory_girl_rails (4.2.1)
       factory_girl (~> 4.2.0)
       railties (>= 3.0.0)
+    faker (1.1.2)
+      i18n (~> 0.5)
     ffi (1.8.1)
     formatador (0.2.4)
-    growl (1.0.3)
     guard (1.8.0)
       formatador (>= 0.2.4)
       listen (>= 1.0.0)
@@ -186,6 +177,7 @@ GEM
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
     websocket (1.0.7)
+    will_paginate (3.0.4)
     xpath (0.1.4)
       nokogiri (~> 1.3)
 
@@ -196,10 +188,11 @@ DEPENDENCIES
   annotate (= 2.5.0)
   bcrypt-ruby (= 3.0.1)
   bootstrap-sass (= 2.3.1.3)
+  bootstrap-will_paginate (= 0.0.9)
   capybara (= 1.1.2)
   coffee-rails (~> 3.2.1)
   factory_girl_rails (= 4.2.1)
-  growl (= 1.0.3)
+  faker (= 1.1.2)
   guard-rspec
   guard-spork (= 1.5.0)
   jquery-rails (= 2.0.2)
@@ -207,10 +200,9 @@ DEPENDENCIES
   mysql2
   pg (= 0.12.2)
   rails (= 3.2.13)
-  rails3_serve_static_assets!
-  rails_log_stdout!
   rb-fsevent (= 0.9.3)
   rspec-rails (= 2.11.0)
   sass-rails (~> 3.2.3)
   spork (= 0.9.2)
   uglifier (>= 1.0.3)
+  will_paginate (= 3.0.4)

@@ -30,6 +30,11 @@ module SessionsHelper
     @current_user ||= User.find_by_remember_token(cookies[:remember_token])
   end
 
+  # 定义 current_user? 方法
+  def current_user?(user)
+    user == current_user
+  end
+
   def signed_in?
     !current_user.nil?
   end
@@ -37,5 +42,16 @@ module SessionsHelper
   def sign_out
     self.current_user = nil # 这行是为了兼容不转向的退出操作
     cookies.delete(:remember_token)
+  end
+
+  # 在某个地方存储这个页面的地址，登录后再转向这个页面。
+  # 通过两个方法来实现这个过程，store_location 和 redirect_back_or
+  def redirect_back_or(default)
+    redirect_to(session[:return_to] || default)
+    session.delete(:return_to)
+  end
+
+  def store_location
+    session[:return_to] = request.fullpath
   end
 end

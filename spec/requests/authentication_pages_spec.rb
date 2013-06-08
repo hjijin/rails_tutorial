@@ -34,15 +34,103 @@ describe "Authentication" do
   		end
 
   		it { should have_selector('title', text: user.name) }
+      it { should have_link('Users', href: users_path) } # 检测“Users”链接的测试
   		it { should have_link('Profile', href: user_path(user)) } # 确保了页面中有一个 a 元素，链接到指定的 URI 地址。
   		it { should have_link('Sign out', href: signout_path) }
   		it { should_not have_link('Sign in', href: signin_path) }
-
+      it { should have_link('Settings', href: edit_user_path(user)) } # 添加检测“设置”链接的测试
       # 测试用户退出
       describe "followed by signout" do
         before { click_link "Sign out" }
         it { should have_link('Sign in') }
       end
   	end
+  end
+
+  # 测试 edit 和 update 动作是否处于被保护状态
+  describe "authorization" do
+
+    describe "for non-signed-in users" do
+      let(:user) { FactoryGirl.create(:user) }
+
+      describe "in the Users controller" do
+
+        describe "visiting the edit page" do
+          before { visit edit_user_path(user) }
+
+          it { should have_selector('title', text: 'Sign in') }
+        end
+
+        describe "submitting to the update action" do
+          before { put user_path(user) } # 直接发起某种 HTTP 请求，则直接使用 HTTP 动词对应的方法即可，例如本例中的 put 发起的就是 PUT 请求
+          specify { response.should redirect_to(signin_path) }
+        end
+
+        describe "visiting the user index" do
+          before { visit users_path }
+          it { should have_selector('title', text: 'Sign in') }
+        end
+      end
+
+      # 测试只有自己才能访问 edit 和 update 动作
+      describe "as wrong user" do
+        let(:user) { FactoryGirl.create(:user) }
+        let(:wrong_user) { FactoryGirl.create(:user, email: "wrong@example.com") }
+        before { sign_in user }
+
+        describe "visiting Users#edit page" do
+          before { visit edit_user_path(wrong_user) }
+          it { should_not have_selector('title', text: full_title('Edit user')) }
+        end
+
+        describe "submitting a PUT request to the Users#update action" do
+          before { put user_path(wrong_user) }
+          specify { response.should redirect_to(root_path) }
+        end
+      end
+
+      # 测试更友好的转向
+      describe "when attempting to visit a protected page" do
+        before do
+          visit edit_user_path(user)
+          fill_in "Email", with: user.email
+          fill_in "Password", with: user.password
+          click_button "Sign in"
+        end
+
+        describe "after signing in" do
+
+          it "should render the desired protected page" do
+            page.should have_selector('title', text: 'Edit user')
+          end
+
+          describe "when signing in again" do
+            before do
+              visit signin_path
+              fill_in "Email", with: user.email
+              fill_in "Password", with: user.password
+              click_button "Sign in"
+            end
+
+            it "should render the default (profile) page" do
+              page.should have_selector('title', text: user.name)
+            end
+          end
+        end
+      end
+    end
+
+    # 测试访问受限的 destroy 动作
+    describe "as non-admin user" do
+      let(:user) { FactoryGirl.create(:user) }
+      let(:non_admin) { FactoryGirl.create(:user) }
+
+      before { sign_in non_admin }
+
+      describe "submitting a DELETE request to the Users#destroy action" do
+        before { delete user_path(user) }
+        specify { response.should redirect_to(root_path) }
+      end
+    end
   end
 end

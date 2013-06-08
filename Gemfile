@@ -4,16 +4,22 @@ source 'http://ruby.taobao.org'
 gem 'rails', '3.2.13'
 gem 'bootstrap-sass', '2.3.1.3'
 gem 'bcrypt-ruby', '3.0.1' # 加密密码 User 数据结构做些改动，向 users 表中加入 password_digest 列
+gem 'faker', '1.1.2' # 为应用程序添加更多的用户
+gem 'will_paginate', '3.0.4'
+gem 'bootstrap-will_paginate', '0.0.9' # 作用是设置 will_paginate 使用 Bootstrap 中的分页样式。
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-group :development, :test do
+
+group :development do
   gem 'mysql2'
+  gem 'annotate', '2.5.0'
+end
+
+group :development, :test do
   gem 'rspec-rails', '2.11.0'
   gem 'guard-rspec'
-  gem 'growl', '1.0.3'
   gem 'guard-spork', '1.5.0'
   gem 'spork', '0.9.2'
-  gem 'annotate', '2.5.0'
 end
 
 gem 'multi_json', '1.7.3'
@@ -41,8 +47,8 @@ end
 
 group :production do
   gem 'pg', '0.12.2'
-  gem 'rails_log_stdout',           github: 'heroku/rails_log_stdout'
-  gem 'rails3_serve_static_assets', github: 'heroku/rails3_serve_static_assets'
+  # gem 'rails_log_stdout',           github: 'heroku/rails_log_stdout'
+  # gem 'rails3_serve_static_assets', github: 'heroku/rails3_serve_static_assets'
 end
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
