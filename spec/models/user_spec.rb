@@ -31,6 +31,8 @@ describe User do
   it { should respond_to(:password_confirmation) }
   it { should respond_to(:remember_token) }
   it { should respond_to(:authenticate) }
+  it { should respond_to(:microposts) } # 测试用户对象是否可以响应 microposts 方法
+  it { should respond_to(:feed) } # 对临时动态列表的测试
 
   it { should be_valid } # 为了保证测试的全面，确保 @user 对象开始时是合法的
 
@@ -151,5 +153,41 @@ describe User do
     before { @user.toggle!(:admin) } # 使用 toggle! 方法把 admin 属性的值从 false 转变成 true。
 
     it { should be_admin } # 说明用户对象应该可以响应 admin? 方法
+  end
+
+  # 测试用户微博的次序
+  describe "micropost associations" do
+
+    before { @user.save }
+    let!(:older_micropost) do
+      FactoryGirl.create(:micropost, user: @user, created_at: 1.day.ago)
+    end
+    let!(:newer_micropost) do
+      FactoryGirl.create(:micropost, user: @user, created_at: 1.hour.ago)
+    end
+
+    it "should have the right microposts in the right order" do
+      @user.microposts.should == [newer_micropost, older_micropost]
+    end
+
+    it "should destroy associated microposts" do
+      microposts = @user.microposts.dup
+      @user.destroy
+      microposts.should_not be_empty
+      microposts.each do |micropost|
+        Micropost.find_by_id(micropost.id).should be_nil
+      end
+    end
+
+    # 对临时动态列表的测试
+    describe "status" do
+      let(:unfollowed_post) do
+        FactoryGirl.create(:micropost, user: FactoryGirl.create(:user))
+      end
+
+      its(:feed) { should include(newer_micropost) }
+      its(:feed) { should include(older_micropost) }
+      its(:feed) { should_not include(unfollowed_post) }
+    end
   end
 end

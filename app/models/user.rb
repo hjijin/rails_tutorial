@@ -12,6 +12,7 @@
 class User < ActiveRecord::Base
   attr_accessible :email, :name, :password, :password_confirmation 
   # 使用 attr_accessible 可以避免 mass assignment 漏洞，这是 Rails 应用程序最常见的安全漏洞之一
+   has_many :microposts, dependent: :destroy
 
   has_secure_password
   # Rails 中已经集成 has_secure_password,  验证 password 和 password_confirmation 是否相等；
@@ -40,6 +41,12 @@ class User < ActiveRecord::Base
 
 		# 上面这种难以置信的过程是可能会发生的，只要有一定的访问量，在任何 Rails 网站中都可能发生。
 		# 幸好解决的办法很容易实现，只需在数据库层也加上唯一性限制。我们要做的是在数据库中为 email 列建立索引，然后为索引加上唯一性限制。
+
+  def feed
+    # This is preliminary. See "Following users" for the full implementation.
+    Micropost.where("user_id = ?", id)
+  end
+  
   private
     # 只会在 User 模型内部使用的方法，没必要把它开放给用户之外的对象。在 Ruby 中，可以使用 private 关键字限制方法的可见性
     def create_remember_token

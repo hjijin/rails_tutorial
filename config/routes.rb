@@ -3,6 +3,8 @@ RailsTutorial::Application.routes.draw do
 
   resources :sessions, only: [:new, :create, :destroy] # 为 resources 方法指定了 :only 选项，只创建 new、create 和 destroy 动作。
 
+  resources :microposts, only: [:create, :destroy]
+  
   match '/signup', to: 'users#new'
   match '/signin', to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete # 这个参数指明 destroy 动作要使用 DELETE 请求

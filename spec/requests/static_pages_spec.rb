@@ -107,4 +107,22 @@ describe "Static Pages" do
     click_link "Tutorial"
     page.should # fill in
   end
+
+  # 测试首页显示的微博列表
+  describe "for signed-in users" do
+    let(:user) { FactoryGirl.create(:user) }
+    before do
+      FactoryGirl.create(:micropost, user: user, content: "Lorem ipsum")
+      FactoryGirl.create(:micropost, user: user, content: "Dolor sit amet")
+      sign_in user
+      visit root_path
+    end
+
+    it "should render the user's feed" do
+      user.feed.each do |item|
+        page.should have_selector("li##{item.id}", text: item.content)
+        # li##{item.id} 中的第一个 # 是 Capybara 中的对应 CSS id 的句法，而第二个 # 则代表 Ruby 字符串插值操作 #{} 的开始。
+      end
+    end
+  end
 end

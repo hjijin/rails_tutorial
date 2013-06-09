@@ -19,8 +19,9 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id]) # params[:id] 返回的是字符串 "1"，find 方法会自动将其转换成整数形式
+    @microposts = @user.microposts.paginate(page: params[:page])
   end
-
+  
   def create
     @user = User.new(params[:user])
     if @user.save
@@ -67,13 +68,14 @@ class UsersController < ApplicationController
   end
 
   private 
-    def signed_in_user
-      unless signed_in?
-        store_location
-        redirect_to signin_path, notice: "Please sign in." #unless signed_in? 
-        #flash[:error] 也可以使用上述的简便方式，但 flash[:success] 却不可以
-      end
-    end
+    # 在 Microposts 控制器中也要用到，那么就把它移到 Sessions 的帮助方法中
+    # def signed_in_user
+    #   unless signed_in?
+    #     store_location
+    #     redirect_to signin_path, notice: "Please sign in." #unless signed_in? 
+    #     #flash[:error] 也可以使用上述的简便方式，但 flash[:success] 却不可以
+    #   end
+    # end
 
     # 保护 edit 和 update 动作的 correct_user 事前过滤器
     # 下面correct_user 方法使用了 current_user? 方法，要在 Sessions 帮助方法模块中定义一下
