@@ -12,7 +12,14 @@
 class User < ActiveRecord::Base
   attr_accessible :email, :name, :password, :password_confirmation 
   # 使用 attr_accessible 可以避免 mass assignment 漏洞，这是 Rails 应用程序最常见的安全漏洞之一
-   has_many :microposts, dependent: :destroy
+  has_many :microposts, dependent: :destroy
+  has_many :relationships, foreign_key: "follower_id", dependent: :destroy # 由于删除用户后，也应该删除该用户的所有“关系”
+  has_many :followed_users, through: :relationships, source: :followed 
+  # 使用 :source 参数，告知 Rails followed_users 数组的来源是 followed 所代表的 id 集合。
+  # 默认情况下，在 has_many through 关联中，Rails 会寻找关联名单数形式对应的外键.上面会使用 relationships 表中的 followed_id 列生成一个数组
+  has_many :reverse_relationships, foreign_key: "followed_id", class_name: "Relationship", dependent: :destroy
+  has_many :followers, through: :reverse_relationships, source: :follower
+  # has_many :followers, through: :reverse_relationships
 
   has_secure_password
   # Rails 中已经集成 has_secure_password,  验证 password 和 password_confirmation 是否相等；
@@ -44,9 +51,23 @@ class User < ActiveRecord::Base
 
   def feed
     # This is preliminary. See "Following users" for the full implementation.
-    Micropost.where("user_id = ?", id)
+    # Micropost.where("user_id = ?", id)
+    Micropost.from_users_followed_by(self)
   end
   
+  # 定义 following? 和 follow! 方法
+  def following?(other_user)
+    relationships.find_by_followed_id(other_user.id)
+  end
+
+  def follow!(other_user)
+    relationships.create!(followed_id: other_user.id)
+  end
+
+  def unfollow!(other_user)
+    relationships.find_by_followed_id(other_user.id).destroy
+  end
+
   private
     # 只会在 User 模型内部使用的方法，没必要把它开放给用户之外的对象。在 Ruby 中，可以使用 private 关键字限制方法的可见性
     def create_remember_token

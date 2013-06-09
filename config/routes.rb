@@ -1,9 +1,15 @@
 RailsTutorial::Application.routes.draw do
-  resources :users
+  resources :users do
+    member do # member 方法作用是，设置这两个动作对应的 URI 地址中应该包含用户的 id。
+      get :following, :followers
+    end
+  end
 
   resources :sessions, only: [:new, :create, :destroy] # 为 resources 方法指定了 :only 选项，只创建 new、create 和 destroy 动作。
 
   resources :microposts, only: [:create, :destroy]
+  
+  resources :relationships, only: [:create, :destroy]
   
   match '/signup', to: 'users#new'
   match '/signin', to: 'sessions#new'
