@@ -1,7 +1,0 @@
-<% if @feed_items.any? %>
-  <ol class="microposts">
-    <%= render partial: 'shared/feed_item', collection: @feed_items %>
-    <!-- 传入了一个名为 :collection 的参数，其值为 @feed_items，这样 render 方法就会在指定的局部视图中（本例中的 feed_item）使用这个集合中的数据渲染各项目。（之前，在渲染局部视图时，我们都省略了 :partial 参数，例如 render 'shared/micropost'，不过如果指定了 :collection 参数，这种省略的用法就是错误的。） -->
-  </ol>
-  <%= will_paginate @feed_items %>
-<% end %>
