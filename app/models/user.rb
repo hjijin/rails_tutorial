@@ -74,8 +74,9 @@ class User < ApplicationRecord
 
 	# 激活账户 
 	def activate
-		update_attribute(:activated, true)
-		update_attribute(:activated_at, Time.zone.now)
+		update_columns(activated: true, activated_at: Time.zone.now)
+		# update_attribute(:activated, true)
+		# update_attribute(:activated_at, Time.zone.now)
 	end
 
 	# 发送激活邮件
