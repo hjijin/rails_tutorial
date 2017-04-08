@@ -50,7 +50,33 @@ Rails.application.configure do
   config.log_tags = [ :request_id ]
 
   # Use a different cache store in production.
+  # 有四个选项可以使用：:memory_store, :file_store, :mem_cache_store, :null_store
+    # :memory_store : 缓存和 Ruby 进程使用共同的内存，默认大小为32M，如果超出这个范围，会移除掉旧的记录。更改这个限制：
+    # config.cache_store = :memory_store, { size: 64.megabytes }
+    
+    # :file_store : 缓存利用文件系统来存放缓存文件，虽然可以在多个应用间共享缓存，但是不建议在产品环境下使用。
+    # 这种方式会不断的增加硬盘使用，直到手动清空所有缓存。
+    # config.cache_store = :file_store, "/path/to/cache/directory"
+
+    # :mem_cache_store :这种方式使用 Memcached 最为后端缓存服务，它提供了高性能的、集中式的缓存服务，
+    # 可以在多个应用间共享缓存，这是一种适合中大型商业应用的选择，使用 Memcached 需要安装 dalli。
+    # config.cache_store = :mem_cache_store, "cache-1.example.com", "cache-2.example.com"
+
+    # :null_store :这是一种适合开发和测试环境的配置，它不会储存任何东西，但是可以正常调试 Rails.cache 中的方法。
+    # config.cache_store = :null_store
+  # 自定义缓存服务: Redis
+    # gem 'redis-rails'
+    # gem "hiredis"
+
+    # config.cache_store = :redis_store, {
+    #   host: 127.0.0.1,
+    #   port: 6379,
+    #   password: 123456,
+    #   db: 1,
+    #   namespace: "cache" 
+    # }
   # config.cache_store = :mem_cache_store
+
 
   # Use a real queuing backend for Active Job (and separate queues per environment)
   # config.active_job.queue_adapter     = :resque

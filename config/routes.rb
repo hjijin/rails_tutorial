@@ -20,4 +20,8 @@ Rails.application.routes.draw do
   resources :users
   resources :account_activations, only: [:edit]
   resources :password_resets, only: [:new, :create, :edit, :update]
+
+  # :format 表示我们可以接受和响应对应的 format 请求。比如/products/1 响应的是 html， /products/1.json 响应的是 json。
+  # 而 我们可以关闭这种响应，只需要： resources :products, format: false
+  # 或者更改响应，只接受和响应 json，如：resources :products, format: 'json'
 end

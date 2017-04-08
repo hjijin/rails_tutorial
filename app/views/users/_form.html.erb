@@ -8,4 +8,5 @@
   <%= f.password_field :password, class: 'form-control' %>
   <%= f.label :password_confirmation %>
   <%= f.password_field :password_confirmation, class: 'form-control' %>
-<%= f.submit yield(:button_text), class: "btn btn-primary" %> <% end %>
+	<%= f.submit yield(:button_text), :data => { :"disable-with" => "请稍等..." }, class: "btn btn-primary" %> 
+<% end %>

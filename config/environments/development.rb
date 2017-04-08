@@ -14,6 +14,7 @@ Rails.application.configure do
 
   # Enable/disable caching. By default caching is disabled.
   if Rails.root.join('tmp/caching-dev.txt').exist?
+    # 页面缓存
     config.action_controller.perform_caching = true
 
     config.cache_store = :memory_store
@@ -22,9 +23,14 @@ Rails.application.configure do
     }
   else
     config.action_controller.perform_caching = false
-
+    # 缓存路径
+    # config.action_controller.page_cache_directory = "#{Rails.root.to_s}/public"
     config.cache_store = :null_store
   end
+
+  # Rails 使用sprockets-rails 来管理 app/assets 中的文件: http://localhost:3000/assets/logo-be2e3e66a18126c4042f84cd4aae4cb3.png
+  # 关闭 be2e3e66a18126c4042f84cd4aae4cb3 这种形式：
+  # config.assets.digest = false
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = true
