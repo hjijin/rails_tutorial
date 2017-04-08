@@ -25,6 +25,7 @@ Rails.application.configure do
     config.action_controller.perform_caching = false
     # 缓存路径
     # config.action_controller.page_cache_directory = "#{Rails.root.to_s}/public"
+
     config.cache_store = :null_store
   end
 
