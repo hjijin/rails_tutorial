@@ -44,6 +44,10 @@ gem "bootsnap", require: false
 gem "bootstrap-sass",  "3.4.1"
 gem "sassc-rails",     "2.1.2"
 
+gem "faker",           "3.2.2"
+gem "will_paginate",   "3.3.1"
+gem "bootstrap-will_paginate",  "1.0.0"
+
 group :development, :test do
   # Use sqlite3 as the database for Active Record
   gem "sqlite3", "~> 1.4"
