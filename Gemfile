@@ -39,7 +39,7 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "bootsnap", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
+gem "image_processing", "1.12.2"
 
 gem "bootstrap-sass",  "3.4.1"
 gem "sassc-rails",     "2.1.2"
@@ -47,6 +47,8 @@ gem "sassc-rails",     "2.1.2"
 gem "faker",           "3.2.2"
 gem "will_paginate",   "3.3.1"
 gem "bootstrap-will_paginate",  "1.0.0"
+
+gem "active_storage_validations", "1.1.3"
 
 group :development, :test do
   # Use sqlite3 as the database for Active Record
